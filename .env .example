@@ -1,0 +1,22 @@
+# Below is for Rupsa
+API_ID=99999
+API_HASH="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# Below Bot token is for Bot109Bot
+BOT_TOKEN="a1b2c3d4d5f6g7h8i9j10k11l12m13n14o15p16q17r18"
+GMAIL_ID="RanaUniverse321@gmail.com"
+
+
+
+# import os
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
+# value = os.environ.get("MY_VALUE")
+
+
+
+# API_ID = os.environ.get("API_ID")
+# API_HASH = os.environ.get("API_HASH")
+# BOT_TOKEN = os.environ.get("BOT_TOKEN")
