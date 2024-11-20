@@ -2,10 +2,12 @@
 This file is just for testing purpose
 """
 
-abc = input("what your age")
+whole_msg = "//Thanks kjfd ma kfjhk gdfh kl   ma  Boss"
+msg_without_cmd = whole_msg.split(maxsplit=1)[0]
+print(msg_without_cmd)
 
-if abc.isdigit():
-    print(f"{int(abc)} This is a valid age of you")
 
-else:
-    print("You need to write numbers not alphabets")
+from uuid import uuid4
+
+for i in range(1000000000000):
+    print(uuid4())

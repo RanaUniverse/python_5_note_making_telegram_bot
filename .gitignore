@@ -12,3 +12,7 @@ wheels/
 
 # First is .env file to protect my bot token
 .env
+
+# i want to stop database file to track
+
+database.db

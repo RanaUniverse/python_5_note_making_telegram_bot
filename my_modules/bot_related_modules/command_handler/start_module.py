@@ -10,7 +10,7 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 
-async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:  # type: ignore
+async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
 
     assert update.message is not None, "update .message is not avialbe msg not"
@@ -27,6 +27,7 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "this bot to learn how to use database to store data and retrieve in future "
         "you can use /help to see how to use different thigns ,\n"
         "First things is i need user registration, and then you can make new note "
-        "you need to pass title and subject to keep starting store your data."
+        "you need to pass title and subject to keep starting store your data.\n"
+        "/new_note Send thsi to make a new note "
     )
     await context.bot.send_message(user.id, text)
