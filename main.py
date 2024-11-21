@@ -18,15 +18,13 @@ from telegram.ext import (
 from dotenv import load_dotenv
 
 
+from files.practise_file import a_conv_example, adding_users_module, new_note_module
 from my_modules.bot_related_modules.command_handler import (
-    adding_users_module,
     start_module,
     help_module,
-    new_note_module,
 )
 from my_modules.bot_related_modules.message_handler import text_msg_module
 from my_modules.bot_related_modules.conversation_handler import (
-    a_conv_example,
     note_making_conversation,
 )
 
@@ -47,10 +45,6 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
-# Define a few command handlers. These usually take the two arguments update and
-# context.
-
-
 def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
@@ -59,10 +53,14 @@ def main() -> None:
         application = Application.builder().token(BOT_TOKEN).build()
     else:
         application = Application.builder().token("RanaUniverse🍌🍌🍌").build()
+        print("There is Not any Bot Token in the .env file, pls edit the .env file ❌")
+        return None
 
     application.add_handler(a_conv_example.conv_handler)
     application.add_handler(a_conv_example.title_subject_handler)
     application.add_handler(note_making_conversation.new_note_handler)
+
+    # I maybe separate the /start differnet for group and user
     application.add_handler(
         CommandHandler(
             "start",
@@ -70,12 +68,15 @@ def main() -> None:
         )
     )
 
+    # i am thinking to make /help different for differnet user in next updates
     application.add_handler(
         CommandHandler(
             "help",
             help_module.help_cmd,
         )
     )
+
+    # This Below will Removed in next time and add the /register
     application.add_handler(
         CommandHandler(
             command="add_me_to_database",
@@ -83,6 +84,7 @@ def main() -> None:
         )
     )
 
+    # this will compltely removed in next time, new: /new_note
     application.add_handler(
         CommandHandler(
             "new_note_without_title",
@@ -90,6 +92,7 @@ def main() -> None:
         )
     )
 
+    # This will also delete, but not idea what to do with this currently
     application.add_handler(
         CommandHandler(
             command="note_iformation_by_note_id",
@@ -97,6 +100,7 @@ def main() -> None:
         )
     )
 
+    # This is not need maybe delete next time
     application.add_handler(
         MessageHandler(
             filters.TEXT & ~filters.COMMAND,

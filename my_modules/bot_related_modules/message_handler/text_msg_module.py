@@ -5,7 +5,7 @@ This is the module to control the flow of text messsage comign from users
 from telegram import Update
 from telegram.ext import ContextTypes
 
-
+# This is common for normal text message will come from the user
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Echo the user message."""
     assert update.message is not None, "update .message is not avialbe msg not"
@@ -15,4 +15,3 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.message.from_user
     text = update.message.text
     await context.bot.send_message(user.id, text.upper())
-    await update.message.reply_text(update.message.text)

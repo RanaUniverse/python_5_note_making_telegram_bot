@@ -1,6 +1,3 @@
-# pyright: ignore
-
-
 """
 This has the logic of how to handle /start message from 
 different users and groups and so on
@@ -8,6 +5,7 @@ different users and groups and so on
 
 from telegram import Update
 from telegram.ext import ContextTypes
+from telegram.constants import ParseMode
 
 
 async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -18,16 +16,12 @@ async def start_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     user = update.message.from_user
 
-    # text = (
-    #     f"Hello {user.full_name} You Have just started this bot,"
-    #     "What do you want from me get /help to know more"
-    # )
     text = (
-        f"This is a Note making and storing applicatioin bot, i am making "
-        "this bot to learn how to use database to store data and retrieve in future "
-        "you can use /help to see how to use different thigns ,\n"
-        "First things is i need user registration, and then you can make new note "
-        "you need to pass title and subject to keep starting store your data.\n"
-        "/new_note Send thsi to make a new note "
+        f"Hello <b>{user.full_name}</b>"
+        f"This is a simple Note Making and storing Bot, You can "
+        f"make new note here and store it and later get your Note, "
+        f"You can also edit your note, share your note. \n"
+        f"Now this bot is in experiment, send /help to know all things. \n"
+        f"Basic Note Making: /new_note"
     )
-    await context.bot.send_message(user.id, text)
+    await context.bot.send_message(user.id, text, parse_mode=ParseMode.HTML)

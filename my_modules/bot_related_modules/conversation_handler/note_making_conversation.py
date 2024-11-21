@@ -41,6 +41,7 @@ async def new_note_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     text = (
         f"You Can Now Make new Note here, i will keep the note in my database "
         "and your data will be saved in our database, and you can also get them. "
+        "To Save after send /cancel and to stop this conversation: /postpone_now \n"
         "Please Send Your Title of the Note 👇👇👇"
     )
     await context.bot.send_message(user.id, text)
@@ -77,7 +78,7 @@ async def get_subject(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     context.user_data["subject"] = update.message.text
     text = (
         f"You have successfully send both title and subject of your note "
-        f"If you want to see the note just press /save_note"
+        f"If you want to see the note just press /save_note or /postpone_now"
     )
     await context.bot.send_message(user.id, text)
     return CONFIRM
@@ -140,6 +141,25 @@ async def cancel_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         "just send /new_note."
     )
     await context.bot.send_message(user.id, text)
+
+    return ConversationHandler.END
+
+
+async def postpone_now_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    """
+    This is also just for check another fallsback
+    """
+    assert update.message is not None, "Message is come with thsi update"
+    assert update.message.from_user is not None, "User is associated"
+
+    user = update.message.from_user
+    text = (
+        f"This is you are going to end the conversation, "
+        "Now i am going to end your convesation , you can start new "
+        "conversation at /new_note"
+    )
+    await context.bot.send_message(user.id, text)
+
     return ConversationHandler.END
 
 
@@ -151,5 +171,8 @@ new_note_handler = ConversationHandler(
         SUBJECT: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_subject)],
         CONFIRM: [CommandHandler("save_note", save_note_cmd)],
     },
-    fallbacks=[CommandHandler("cancel", cancel_cmd)],
+    fallbacks=[
+        CommandHandler("cancel", cancel_cmd),
+        CommandHandler("postpone_now", postpone_now_cmd),
+    ],
 )

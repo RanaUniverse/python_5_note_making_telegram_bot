@@ -140,7 +140,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 conv_handler = ConversationHandler(
     entry_points=[
-        CommandHandler("start", start),
+        CommandHandler("start_conversation", start),
         CommandHandler("helps_conversation", help_conversation),
     ],
     states={
